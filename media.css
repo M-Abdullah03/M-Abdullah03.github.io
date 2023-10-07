@@ -1,0 +1,59 @@
+@media only screen and (max-width: 400px) {
+
+    .card,
+    .expanded-card {
+        flex-direction: column;
+        align-items: left;
+        text-align: left;
+        margin-bottom: 3rem;
+        
+    }
+
+    nav{
+        background-image: url("./images/bg-header-mobile.svg");
+
+    }
+    .card img,
+    .expanded-card .logo {
+        width: 20%;
+        height: auto;
+        position: absolute;
+        top: 0;
+        left: 15%;
+        transform: translate(-50%, -50%);
+    }
+
+    #close-card{
+        position: absolute;
+        top: 10p;
+        right: 30px;
+    }
+
+    .card .details {
+        position: relative;
+        z-index: 1;
+    }
+
+    .company {
+        margin-top: 1rem;
+    }
+
+    .details {
+        /* add line at bottom */
+        border-bottom: 1px solid grey;
+        padding-bottom: 1rem;
+    }
+
+    .filter-list-active {
+        align-items: center;
+        padding: auto;
+        margin: auto;
+
+        max-width: 90%;
+    }
+
+    .filter-list-active .filter {
+        margin-bottom: 1rem;
+    }
+
+}

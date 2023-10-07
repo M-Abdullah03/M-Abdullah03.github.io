@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+
+  <title>Frontend Mentor | Job Listings</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+
+
+  </style>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- navbar -->
+  <nav></nav>
+  <div id="filter-list">
+    <!-- <span class="active-filter">Frontend 
+      <span class="close">
+        <img src="./images/icon-remove.svg" alt="close" class="close-icon">
+      </span>
+    </span> -->
+  </div>
+  <div class="main">
+    <!-- <div class="card ">
+        <div class="image-area">
+        <img src="./images/photosnap.svg" alt="logo" class="logo">
+      </div>
+
+      <div class="description-area">
+        <div class="company-wrapper">
+          <label class="company">Photosnap</label>
+          <span class="new-tag">NEW!</span>
+          <span class="featured-tag">FEATURED</span>
+        </div>
+        <div class="job-name">
+          <label class="position">Senior Frontend Developer</label>
+        </div>
+        <div class="details">
+          <span class="posted">1d●ago</span>
+          <span class="contract">Full Time</span>
+          <span class="location">USA only</span>
+        </div>
+      </div>
+      <div class="filters">
+        <span class="filter">Frontend</span>
+        <span class="filter">Senior</span>
+        <span class="filter">HTML</span>
+        <span class="filter">CSS</span>
+        <span class="filter">JavaScript</span>
+      </div>
+      <div class="delete">
+      </div>
+    </div> -->
+  </div>
+
+
+  <button id="add-button"></button>
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+
+  <div id="add-job-popup" class="popup">
+    <div class="popup-content">
+      <span id="close-button" class="close-btn"><img src="./images/icon-remove.svg" alt="close"></span>
+      <h2>Add Job</h2>
+      <form id="add-job-form">
+        <label for="company">Company:</label>
+        <input type="text" id="company" name="company" required pattern="\S(.*\S)?" title="No whitespaces in beginning or end">
+        <label for="logo">Logo:</label>
+        <input type="file" id="logo" name="logo" accept="image/png, image/jpeg" required>
+        <div class="checkboxes">
+          <label for="featured">Featured:</label>
+          <input type="checkbox" id="featured" name="featured" class="checkbox">
+        </div>
+        <label for="position">Position:</label>
+        <input type="text" id="position" name="position" required pattern="\S(.*\S)?" title="No whitespaces in beginning or end">
+        <label for="role">Role:</label>
+        <select id="role" name="role" required>
+          <option value="">Choose</option>
+          <option value="Frontend">Frontend</option>
+          <option value="Backend">Backend</option>
+          <option value="Fullstack">Fullstack</option>
+        </select>
+        <label for="level">Level:</label>
+        <select id="level" name="level" required>
+          <option value="">Choose</option>
+          <option value="Junior">Junior</option>
+          <option value="Midweight">Midweight</option>
+          <option value="Senior">Senior</option>
+        </select>
+        <label for="contract">Contract:</label>
+        <select id="contract" name="contract" required>
+          <option value="">Choose</option>
+          <option value="Full Time">Full Time</option>
+          <option value="Part Time">Part Time</option>
+          <option value="Contract">Contract</option>
+        </select>
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required>
+        <label for="languages">Languages:</label>
+        <input type="text" id="languages" name="languages" required placeholder="Separate by commas" pattern="\S(.*\S)?" title="No whitespaces in beginning or end">
+        <label for="tools">Tools:</label>
+        <input type="text" id="tools" name="tools" required placeholder="Separate by commas" pattern="\S(.*\S)?" title="No whitespaces in beginning or end">
+        <button type="submit">Add Job</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="job-popup" class="popup">
+    <div class="expanded-card">
+      <div class="image-area">
+        <img src="./images/photosnap.svg" alt="logo" class="logo">
+      </div>
+
+      <div class="description-area">
+        <div class="company-wrapper">
+          <label class="company">Photosnap</label>
+          <span class="new-tag" style="margin-top:0px;">NEW!</span>
+          <span class="featured-tag" style="margin-top:0px;">FEATURED</span>
+        </div>
+        <div class="job-name">
+          <label class="position">Senior Frontend Developer</label>
+        </div>
+        <div class="details-expanded">
+          <div class="detail-div">
+            <div class="detail-title">Languages</div>
+            <div id="languagesList">
+              <div class="detail-content">HTML</div>
+              <div class="detail-content">CSS</div>
+              <div class="detail-content">JavaScript</div>
+            </div>
+          </div>
+          <div class="detail-div">
+            <div class="detail-title">Tools</div>
+            <div id="toolsList">
+              <div class="detail-content">React</div>
+              <div class="detail-content">Sass</div>
+            </div>
+          </div>
+
+          <span class="posted-expanded">1d●ago</span>
+        </div>
+      </div>
+      <div class="filter-area">
+        <div class="filter-expanded">
+          <span class="filter-title">Contract</span>
+          <span class="filter-name" id="contract-text">Full Time</span>
+        </div>
+        <div class="filter-expanded">
+          <span class="filter-title">Role</span>
+          <span class="filter-name" id="role-text">Frontend</span>
+        </div>
+        <div class="filter-expanded">
+          <span class="filter-title">Level</span>
+          <span class="filter-name" id="level-text">Senior</span>
+        </div>
+        <div class="filter-expanded">
+          <span class="filter-title">Location</span>
+          <span class="filter-name" id="location-text">USA only</span>
+        </div>
+
+      </div>
+      <span id="close-card" class="card-close-btn"><img src="./images/icon-remove.svg" alt="close"></span>
+
+
+    </div>
+  </div>
+
+
+</body>
+<script src="script.js"></script>
+<link rel="stylesheet" href="media.css">
+
+</html>
