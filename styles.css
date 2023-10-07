@@ -62,6 +62,8 @@
   border-radius: 50%;
   height: 5rem;
   margin-right: 1rem;
+  width: 5rem;
+  object-fit: cover;
 }
 
 .company {

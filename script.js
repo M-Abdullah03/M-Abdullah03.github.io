@@ -28,8 +28,13 @@ $(document).ready(function () {
 
         var reader = new FileReader();
         reader.readAsDataURL($("#logo")[0].files[0]);
+        
         reader.onload = function () {
             var filePath = reader.result;
+            var languageArray = $("#languages").val().split(",");
+            languageArray = clean(languageArray);
+            var toolArray = $("#tools").val().split(",");
+            toolArray = clean(toolArray);
             var job = {
                 "id": jobs.length,
                 "company": $("#company").val(),
@@ -42,13 +47,14 @@ $(document).ready(function () {
                 "postedAt": 'now',
                 "contract": $("#contract").val(),
                 "location": $("#location").val(),
-                "languages": $("#languages").val().split(","),
-                "tools": $("#tools").val().split(",")
+                "languages": languageArray,
+                "tools": toolArray
             };
             jobs.push(job);
-            loadAllJobs();
             $("#add-job-popup").hide();
+            loadAllJobs();
             filterJobs();
+            $("#add-job-form")[0].reset();
         };
 
     });
@@ -56,6 +62,17 @@ $(document).ready(function () {
 
 });
 
+function clean(array){
+    array = array.map(function (item) {
+        return item.trim();
+    });
+
+    array = array.filter(function (item) {
+        return item !== "";
+    });
+    return array;
+
+}
 
 function loadAllJobs() {
     $(".main").empty();
@@ -66,7 +83,8 @@ function loadAllJobs() {
     var nonFeaturedJobs = jobs.filter(function (job) {
         return !job.featured;
     });
-
+    jobs = featuredJobs.concat(nonFeaturedJobs);
+    console.log(featuredJobs);
     renderCards(featuredJobs);
     renderCards(nonFeaturedJobs);
     checkHeight();
@@ -93,27 +111,21 @@ function filterJobs(filter) {
     var filterList = $("#filter-list").find("span");
     var filterArray = [];
     var filteredJobs = jobs;
+    console.log(filteredJobs);
     $.each(filterList, function (key, value) {
         if ($(value).text() !== "")
             filterArray.push($(value).text());
 
     });
-    filterArray = filterArray.map(function (item) {
-        return item.trim();
-    });
 
-    filterArray = filterArray.filter(function (item) {
-        return item !== "";
-    });
-
-    console.log(filterArray);
+    filterArray = clean(filterArray);
 
     $.each(filterArray, function (key, value) {
         filteredJobs = filteredJobs.filter(function (job) {
             return job.role === value || job.level === value || job.languages.includes(value) || job.tools.includes(value);
         });
     });
-
+    console.log(filteredJobs);
 
     renderCards(filteredJobs);
     checkHeight();
